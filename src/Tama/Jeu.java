@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Jeu;
+package Tama;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +18,8 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * @author DJBRANBRAN
  */
-public class Main {
+public class Jeu {
+   
     public static void main(String args[]){
         Initialiser_page();
         Initialiser_GL();
@@ -87,7 +88,7 @@ public class Main {
                 Display.setDisplayMode(new DisplayMode(800,600));
                 Display.create();
             } catch (LWJGLException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     
