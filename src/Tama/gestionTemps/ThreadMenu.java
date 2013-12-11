@@ -1,6 +1,6 @@
 package Tama.gestionTemps;
 
-import Menu.*;
+import Tama.*;
 //import gestionObjets.Heros;
 import java.util.logging.Level;
 import java.util.logging.Logger;

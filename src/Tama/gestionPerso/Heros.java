@@ -253,5 +253,9 @@ public class Heros extends Personnage {
     public void miner(){
         this.pepite=this.pepite+1;
     }
+
+    public int getDefActuel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
