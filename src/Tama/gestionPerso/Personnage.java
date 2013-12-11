@@ -1,4 +1,6 @@
-package Tama;
+package Tama.gestionPerso;
+
+import Tama.gestionObjets.Objet;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

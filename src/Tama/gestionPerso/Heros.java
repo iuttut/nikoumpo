@@ -1,6 +1,7 @@
-package Tama;
+package Tama.gestionPerso;
 
 
+import Tama.gestionObjets.Nourriture;
 import java.util.Date;
 
 /*

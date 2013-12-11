@@ -1,6 +1,8 @@
 package Tama;
 
 
+import Tama.gestionPerso.Heros;
+import Tama.gestionObjets.Nourriture;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
