@@ -28,7 +28,9 @@ public class Fichier {
             System.exit(1);
         }
         //------------------ Lecture d'un fichier ---------------------------------
-        int i,j=0;
+        int i=0,j=0;
+        int max=0, min=0, actuel=0;
+        
 
         
         BufferedReader fent = new BufferedReader( new FileReader( fe ) );
@@ -40,17 +42,56 @@ public class Fichier {
         }
         
         i=(int)(Math.random()*j);// 0<i<nbr de lignes
-        int k=0;
-        String str=null;
+        String ligne=null;
+        String  []partie=null;
+        String parametre=null;
         System.out.println( "Voici le contenu du fich :" );
         BufferedReader f = new BufferedReader(new FileReader(fe));
         
-        while ( ( str = f.readLine( ) ) != null ) // null en cas de fin de fichier
+        while ( ( ligne = f.readLine( ) ) != null ) // null en cas de fin de fichier
         {
-            if (k==i){            
-                System.out.println( str );
+            partie=ligne.split("_");
+            max=Integer.parseInt(partie[1]);
+            min=Integer.parseInt(partie[2]);
+            actuel=Integer.parseInt(partie[3]);
+            parametre=partie[0];
+            if(parametre.equals("PV")){
+                
             }
-            k++;
+            if(parametre.equals("MP")){
+                
+            }
+            if(parametre.equals("LVL")){
+                
+            }
+            if(parametre.equals("EXP")){
+                
+            }
+            if(parametre.equals("FORCE")){
+                
+            }
+            if(parametre.equals("DEFENSE")){
+                
+            }
+            if(parametre.equals("RESISTANCE")){
+                
+            }
+            if(parametre.equals("HUMEUR")){
+                
+            }
+            if(parametre.equals("FAIM")){
+                
+            }
+            if(parametre.equals("SOMMEIL")){
+                
+            }
+            if(parametre.equals("PEPITE")){
+                
+            }
+            if(parametre.equals("OR")){
+                
+            }
+            
         }
         fent.close( );
                
