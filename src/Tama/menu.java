@@ -25,11 +25,30 @@ public class menu extends javax.swing.JFrame {
      * Creates new form menu
      */
     Date dateDebut, dateFin;
-
-    Heros heros = new Heros("Nikoumpo", 400, 300, 400, 1, 0, 100, 100, 40, 100, 20, 40, 40, 1, 100, 0, 0, 0);
+    
+    Heros heros;
     Nourriture bonbon = new Nourriture("Bonbon", 0.01F, 10);
 
     public menu() {
+        
+        new Thread() {
+            @Override
+            public void run() {
+                float [] tab=null;
+                String [] arg=null;
+                try{
+                    tab=Charger.main(arg);
+                }catch(Exception e){
+                    System.out.println("Erreur de Chargement.main");
+                }
+                heros= new Heros("DJBRANBRAN",(int)tab[0],(int)tab[1],(int)tab[2],(int)tab[3],
+                    (int)tab[4],(int)tab[5],(int)tab[6],(int)tab[7],(int)tab[8],(int)tab[9],
+                    (int)tab[10],(int)tab[11],(int)tab[12],(int)tab[13],(int)tab[14],
+                    (int)tab[15],(int)tab[16],(int)tab[17],(int)tab[18],(int)tab[19],
+                    (int)tab[20],(int)tab[21]);
+            }
+        }.start();
+        
         initComponents();
     }
 

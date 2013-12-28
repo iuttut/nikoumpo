@@ -27,17 +27,56 @@ public class Heros extends Personnage {
     private int sommeil;
     private int atk;
     private int def;
+    private float resistance;
     private float crit;
     private int vitesse;
+    
     private int ep;
     private int epPv;
     private int epMp;
     
-    private int pvActuel;
-    private int faimActuel;
-    private int sommeilActuel;
-    private int humeurActuel;
 
+    
+    
+    private int pvActuel;
+    private float expActuelle;
+    private int mpActuel;
+    private int faimActuelle;
+    private int sommeilActuel;
+    private int humeurActuelle;
+
+    
+    
+    public void setResistance(int Resistance) {
+        this.resistance = Resistance;
+    }
+
+    public void setHumeurActuelle(int humeurActuelle) {
+        this.humeurActuelle = humeurActuelle;
+    }
+
+    public float getResistance() {
+        return resistance;
+    }
+
+    public int getHumeurActuelle() {
+        return humeurActuelle;
+    }
+    
+    public void setExpActuelle(float expActuelle) {
+        this.expActuelle = expActuelle;
+    }
+
+    public float getExpActuelle() {
+        return expActuelle;
+    }
+    public void setMpActuel(int mpActuel) {
+        this.mpActuel = mpActuel;
+    }
+
+    public int getMpActuel() {
+        return mpActuel;
+    }
     public int getPv() {
         return pv;
     }
@@ -159,11 +198,11 @@ public class Heros extends Personnage {
     }
 
     public int getFaimActuel() {
-        return faimActuel;
+        return faimActuelle;
     }
 
     public void setFaimActuel(int faimActuel) {
-        this.faimActuel = faimActuel;
+        this.faimActuelle = faimActuel;
     }
 
     public int getSommeilActuel() {
@@ -175,11 +214,11 @@ public class Heros extends Personnage {
     }
 
     public int getHumeurActuel() {
-        return humeurActuel;
+        return humeurActuelle;
     }
 
     public void setHumeurActuel(int humeurActuel) {
-        this.humeurActuel = humeurActuel;
+        this.humeurActuelle = humeurActuel;
     }
 
     public int getPepite() {
@@ -206,37 +245,57 @@ public class Heros extends Personnage {
         this.ennui = ennui;
     }
     
-    public Heros(String nom, int pv, int pvActuel, int mp, int lvl, float exp, int humeur, 
-            int faim, int faimActuel, int sommeil, int sommeilActuel, int atk, int def, float crit, int vitesse, int ep, int epPv, int epMp){
+    public Heros(String nom, int pv, int pvActuel, int mp, int mpActuel, int lvl, float exp,float expActuelle,  
+            int faim, int faimActuelle, int sommeil, int sommeilActuel, int humeur,
+            int pepite,int or,
+            int atk, int def, float resistance,float crit, int vitesse,
+            int ep, int epPv, int epMp){
+        
+        //Nom
         super(nom);
+        
+        //Pour le jeu
         this.pv = pv;
         this.pvActuel = pvActuel;
         this.mp = mp;
+        this.mpActuel=mpActuel;
         this.lvl = lvl;
         this.exp = exp;
-        this.humeur = humeur;
-        this.humeurActuel = (faimActuel+sommeilActuel)/2;
+        this.expActuelle = expActuelle;
+        
+        //Tama
         this.faim = faim;
-        this.faimActuel = faimActuel;
+        this.faimActuelle = faimActuelle;
         this.sommeil = sommeil;
         this.sommeilActuel = sommeilActuel;
+        this.humeur = humeur;
+        this.humeurActuelle = (faimActuelle+sommeilActuel)/2;
+        
+        //Capital
+        this.pepite=pepite;
+        this.gold=or;
+        
+        //Arme
         this.atk = atk;
         this.def = def;
+        this.resistance = resistance;
         this.crit = crit;
         this.vitesse = vitesse;
+        
+        //Bonus
         this.ep = ep;
         this.epPv = epPv;
         this.epMp = epMp;
     }
     
     public void nourrir(Nourriture n){
-        if(this.faimActuel+n.getFaim()>=100){
-            this.faimActuel=100;
+        if(this.faimActuelle+n.getFaim()>=100){
+            this.faimActuelle=100;
         }
         else{
-            this.faimActuel=this.faimActuel+n.getFaim();
+            this.faimActuelle=this.faimActuelle+n.getFaim();
         }
-        this.humeurActuel = (faimActuel+sommeilActuel)/2;
+        this.humeurActuelle = (faimActuelle +sommeilActuel)/2;
     }
     
     public void dormir(Long temps){
@@ -247,7 +306,7 @@ public class Heros extends Personnage {
         else{
             this.sommeilActuel=this.sommeilActuel+10*tps;
         }
-        this.humeurActuel = (faimActuel+sommeilActuel)/2;
+        this.humeurActuelle = (faimActuelle+sommeilActuel)/2;
     }
     
     public void miner(){
