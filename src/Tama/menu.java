@@ -1,6 +1,7 @@
 package Tama;
 
 
+import Tama.jeu.Jeu;
 import Tama.gestionPerso.Heros;
 import Tama.gestionObjets.Nourriture;
 import java.awt.Frame;

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Tama;
+package Tama.jeu;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
