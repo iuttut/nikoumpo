@@ -213,14 +213,6 @@ public class Heros extends Personnage {
         this.sommeilActuel = sommeilActuel;
     }
 
-    public int getHumeurActuel() {
-        return humeurActuelle;
-    }
-
-    public void setHumeurActuel(int humeurActuel) {
-        this.humeurActuelle = humeurActuel;
-    }
-
     public int getPepite() {
         return pepite;
     }

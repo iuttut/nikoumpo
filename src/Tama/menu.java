@@ -72,6 +72,7 @@ public class menu extends javax.swing.JFrame {
         LabelPepite = new javax.swing.JLabel();
         Pepite = new javax.swing.JLabel();
         LVL = new javax.swing.JLabel();
+        ButtonSauvegarder = new javax.swing.JButton();
         PanelEtat = new javax.swing.JPanel();
         BarMP = new javax.swing.JProgressBar();
         BarPV = new javax.swing.JProgressBar();
@@ -122,9 +123,20 @@ public class menu extends javax.swing.JFrame {
 
         LabelOr.setText("Or :");
 
+        Or.setText("0");
+
         LabelPepite.setText("Pepite:");
 
-        LVL.setText("jLabel6");
+        Pepite.setText("0");
+
+        LVL.setText("0");
+
+        ButtonSauvegarder.setText("Sauvegarder");
+        ButtonSauvegarder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonSauvegarderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelQueteLayout = new javax.swing.GroupLayout(PanelQuete);
         PanelQuete.setLayout(PanelQueteLayout);
@@ -147,10 +159,15 @@ public class menu extends javax.swing.JFrame {
                         .addComponent(LabelQuete)
                         .addGap(94, 94, 94))
                     .addGroup(PanelQueteLayout.createSequentialGroup()
-                        .addComponent(LabelLVL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LVL)
-                        .addGap(108, 108, 108)
+                        .addGroup(PanelQueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelQueteLayout.createSequentialGroup()
+                                .addComponent(LabelLVL)
+                                .addGap(18, 18, 18)
+                                .addComponent(LVL))
+                            .addGroup(PanelQueteLayout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(ButtonSauvegarder)))
+                        .addGap(50, 50, 50)
                         .addComponent(ButtonGO, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -170,15 +187,16 @@ public class menu extends javax.swing.JFrame {
                             .addComponent(Pepite))))
                 .addGroup(PanelQueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelQueteLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(6, 6, 6)
                         .addGroup(PanelQueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(LabelLVL)
                             .addComponent(LVL))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelQueteLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(ButtonSauvegarder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PanelQueteLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonGO, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(ButtonGO, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         PanelEtat.setBackground(new java.awt.Color(153, 180, 209));
@@ -488,8 +506,8 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonDormirMouseClicked
 
     private void BarHumeurPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_BarHumeurPropertyChange
-        BarHumeur.setValue(heros.getHumeurActuel() * 100 / heros.getHumeur());
-        BarHumeur.setString(heros.getHumeurActuel() + "/" + heros.getHumeur());
+        BarHumeur.setValue(heros.getHumeurActuelle() * 100 / heros.getHumeur());
+        BarHumeur.setString(heros.getHumeurActuelle() + "/" + heros.getHumeur());
         jLabel13.setText("ahahaha");
     }//GEN-LAST:event_BarHumeurPropertyChange
 
@@ -525,6 +543,33 @@ public class menu extends javax.swing.JFrame {
    }.start();
     }//GEN-LAST:event_ButtonGOActionPerformed
 
+    private void ButtonSauvegarderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSauvegarderActionPerformed
+       float [] tab= new float[22];
+       tab[0]=heros.getPv();
+       tab[1]=heros.getPvActuel();
+       tab[2]=heros.getMp();
+       tab[3]=heros.getMpActuel();
+       tab[4]=heros.getLvl();
+       tab[5]=heros.getExp();
+       tab[6]=heros.getExpActuelle();
+       tab[7]=heros.getFaim();
+       tab[8]=heros.getFaimActuel();
+       tab[9]=heros.getSommeil();
+       tab[10]=heros.getSommeilActuel();
+       tab[11]=heros.getHumeur();
+       tab[12]=heros.getHumeurActuelle();
+       tab[13]=heros.getGold();
+       tab[14]=heros.getAtk();
+       tab[15]=heros.getDef();
+       tab[16]=heros.getResistance();
+       tab[17]=heros.getCrit();
+       tab[18]=heros.getVitesse();
+       tab[19]=heros.getEp();
+       tab[20]=heros.getEpPv();
+       tab[21]=heros.getEpMp();
+       Sauvegarder.main(tab);     
+    }//GEN-LAST:event_ButtonSauvegarderActionPerformed
+
     /**
      * @param args the command line arguments
      * @throws java.lang.InterruptedException
@@ -554,6 +599,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JToggleButton ButtonDormir;
     private javax.swing.JButton ButtonGO;
     private javax.swing.JButton ButtonNourrir;
+    private javax.swing.JButton ButtonSauvegarder;
     private javax.swing.JLabel LVL;
     private javax.swing.JLabel LabelDefense;
     private javax.swing.JLabel LabelEXP;

@@ -54,7 +54,7 @@ public class Charger {
             min=Integer.parseInt(partie[2]);
             actuel=Integer.parseInt(partie[3]);
             parametre=partie[0];
-            System.out.println(parametre +":"+max+"_"+min+"_"+actuel);
+           // System.out.println(parametre +":"+max+"_"+min+"_"+actuel);
             if(parametre.equals("PV")){
                 System.out.println("Tu es rentré dans PV");
                 tab[0]=max;
@@ -118,7 +118,7 @@ public class Charger {
                 
             }
             if(parametre.equals("VITESSE")){
-                tab[18]=max;
+                tab[18]=actuel;
                 
             }
             if(parametre.equals("EXTRAPOINT")){
@@ -132,7 +132,7 @@ public class Charger {
         }
         fent.close( );
         
-        int i = 0;
+   /*     int i = 0;
         System.out.println("-------------------------------");
         System.out.println("------------- TAB -------------");
         System.out.println("-------------------------------");
@@ -140,7 +140,7 @@ public class Charger {
             System.out.println(tab[i]);
             i++;
         }
-        
+     */   
         return tab;
             
        }// fin main
