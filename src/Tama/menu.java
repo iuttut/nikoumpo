@@ -34,10 +34,10 @@ public class menu extends javax.swing.JFrame {
         new Thread() {
             @Override
             public void run() {
-                float [] tab=null;
+              float [] tab=null;
                 String [] arg=null;
                 try{
-                    tab=Charger.main(arg);
+                    tab=Charger.charger();
                 }catch(Exception e){
                     System.out.println("Erreur de Chargement.main");
                 }
@@ -46,10 +46,10 @@ public class menu extends javax.swing.JFrame {
                     (int)tab[10],(int)tab[11],(int)tab[12],(int)tab[13],(int)tab[14],
                     (int)tab[15],(int)tab[16],(int)tab[17],(int)tab[18],(int)tab[19],
                     (int)tab[20],(int)tab[21]);
-            }
+           }
         }.start();
         
-        initComponents();
+      initComponents();
     }
 
     /**
@@ -99,6 +99,8 @@ public class menu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         PanelPerso = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ninkoumpo");
@@ -454,6 +456,32 @@ public class menu extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("HOME", PanelHome);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 349, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 349, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab3", jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -567,7 +595,7 @@ public class menu extends javax.swing.JFrame {
        tab[19]=heros.getEp();
        tab[20]=heros.getEpPv();
        tab[21]=heros.getEpMp();
-       Sauvegarder.main(tab);     
+       Sauvegarder.sauvegarder(tab);     
     }//GEN-LAST:event_ButtonSauvegarderActionPerformed
 
     /**
@@ -625,6 +653,8 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

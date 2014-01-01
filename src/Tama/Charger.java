@@ -23,7 +23,7 @@ public class Charger {
         
     }
     
-     public static /*void*/float [] main(String [] args) throws IOException {
+     public static float [] charger() throws IOException {
         float [] tab = new float[22];
         
         File fe = new File("C:\\Users\\DJBRANBRAN\\Documents\\GitHub\\nikoumpo\\src\\Tama\\Sauvegarde.txt");
@@ -51,8 +51,8 @@ public class Charger {
         {
             partie=ligne.split("_");
             max=Float.parseFloat(partie[1]);
-            min=Integer.parseInt(partie[2]);
-            actuel=Integer.parseInt(partie[3]);
+            min=Float.parseFloat(partie[2]);
+            actuel=Float.parseFloat(partie[3]);
             parametre=partie[0];
            // System.out.println(parametre +":"+max+"_"+min+"_"+actuel);
             if(parametre.equals("PV")){
@@ -131,6 +131,7 @@ public class Charger {
             
         }
         fent.close( );
+      //  fe.delete();
         
    /*     int i = 0;
         System.out.println("-------------------------------");
@@ -141,8 +142,12 @@ public class Charger {
             i++;
         }
      */   
-        return tab;
+       return tab;
             
        }// fin main
+
+    float[] main(String[] arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
       }
