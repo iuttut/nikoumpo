@@ -17,7 +17,7 @@ public class Sauvegarder {
     try {
       //Création de l'objet
       fw = new FileWriter(file);
-      String str = "Bonjour à tous, amis Zéros oooooooooooooooooooooooo !\n";
+      String str;
       str="PV_"+tab[0]+"_0_"+tab[1]+"\n"
         + "MP_"+tab[2]+"_0_"+tab[3]+"\n"
         + "LVL_100_0_"+tab[4]+"\n"

@@ -1,7 +1,7 @@
 package Tama;
 
 
-import Tama.jeu.Jeu;
+import Tama.jeu.Sokoban;
 import Tama.gestionPerso.Heros;
 import Tama.gestionObjets.Nourriture;
 import java.awt.Frame;
@@ -34,8 +34,9 @@ public class menu extends javax.swing.JFrame {
         new Thread() {
             @Override
             public void run() {
-              float [] tab=null;
-                String [] arg=null;
+                
+              float [] tab=new float[22];
+                String [] arg=new String[100];
                 try{
                     tab=Charger.charger();
                 }catch(Exception e){
@@ -566,7 +567,7 @@ public class menu extends javax.swing.JFrame {
         @Override
         public void run() {
             String [] arg={"Jeu","Virtuel"};
-             Jeu.main(arg);
+             Sokoban.main(arg);
         }
    }.start();
     }//GEN-LAST:event_ButtonGOActionPerformed
@@ -584,8 +585,8 @@ public class menu extends javax.swing.JFrame {
        tab[8]=heros.getFaimActuel();
        tab[9]=heros.getSommeil();
        tab[10]=heros.getSommeilActuel();
-       tab[11]=heros.getHumeur();
-       tab[12]=heros.getHumeurActuelle();
+       tab[11]=heros.getHumeurActuelle();
+       tab[12]=heros.getPepite();
        tab[13]=heros.getGold();
        tab[14]=heros.getAtk();
        tab[15]=heros.getDef();
@@ -609,6 +610,7 @@ public class menu extends javax.swing.JFrame {
                 public void run() {
                     
                     new menu().setVisible(true);
+                    
                 }
             });
         } catch (InvocationTargetException ex) {
