@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import static sun.security.krb5.Config.refresh;
 
 /**
  *
@@ -29,28 +30,176 @@ public class Board extends JPanel {
     private ArrayList walls = new ArrayList();
     private ArrayList baggs = new ArrayList();
     private ArrayList areas = new ArrayList();
+    private ArrayList portes = new ArrayList();
     private Player soko;
     private int w = 0;
     private int h = 0;
     private boolean completed = false;
+    private boolean entreeH = false;
+    private boolean entreeB = false;
+    private boolean entreeG = false;
+    private boolean entreeD = false;
     
     private String level;
+    private int pLevel;
 
-    public Board(int i) {
-        if (i==0){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
+    public Board() {
+        modifierPage();
+        affichage(level);
+        
+    }
+    public void modifierPage(){
+        if(entreeG==true){//Pages à Gauche
+            if(pLevel==3){//En haut à gauche
+            level =
+                "00000000000000000000\n"
+              + "0                  0\n"
+              + "0                 @P\n"
+              + "0       111        0\n"
+              + "0       111        0\n"
+              + "0       111        0\n"
+              + "0       111        0\n"
+              + "0       111        0\n"
+              + "0                  0\n"
+              + "0                  0\n"
+              + "00P00000000000000000\n"; 
+            pLevel=1;
+            }
+            else if(pLevel==4){//En bas à gauche
+            level =
+                "00P00000000000000000\n"
+              + "0                  0\n"
+              + "0                  0\n"
+              + "0     11111111     0\n"
+              + "0          11      0\n"
+              + "0         11       0\n"
+              + "0       11111111   0\n"
+              + "0                  0\n"
+              + "0                 @P\n"
+              + "0                  0\n"
+              + "00000000000000000000\n"; 
+            pLevel=2;
+            }
+            entreeG=false;          
         }
+        if(entreeD==true){//Pages à droite
+            if(pLevel==0 || pLevel==1){//Haut
+            level =
+              "00000000000000000000\n"
+            + "0                  0\n"
+            + "P@                 0\n"
+            + "0   11111111       0\n"
+            + "0         11       0\n"
+            + "0      11111       0\n"
+            + "0         11       0\n"
+            + "0   11111111       0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "0000000000000P000000\n";  
+            pLevel=3;
+            }
+            else if(pLevel==4){//Bas
+            level =
+              "0000000000000P000000\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "0   11             0\n"
+            + "0   11  11         0\n"
+            + "0   111111111      0\n"
+            + "0       11         0\n"
+            + "0       11         0\n"
+            + "P@                 0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";  
+            pLevel=4;
+            }
+            entreeD=false;
+        }
+        if(entreeH==true){//Pages en Haut
+            if(pLevel==2){//Gauche
+            level =
+                "00000000000000000000\n"
+              + "0                  0\n"
+              + "0                  P\n"
+              + "0       111        0\n"
+              + "0       111        0\n"
+              + "0       111        0\n"
+              + "0       111        0\n"
+              + "0       111        0\n"
+              + "0                  0\n"
+              + "0 @                0\n"
+              + "00P00000000000000000\n"; 
+            pLevel=1;
+            }
+            else if(pLevel==4){//Droite
+            level =
+              "00000000000000000000\n"
+            + "0                  0\n"
+            + "P                  0\n"
+            + "0   11111111       0\n"
+            + "0         11       0\n"
+            + "0      11111       0\n"
+            + "0         11       0\n"
+            + "0   11111111       0\n"
+            + "0                  0\n"
+            + "0            @     0\n"
+            + "0000000000000P000000\n";  
+            pLevel=3;
+            }
+            entreeH=false;
+        }
+        if(entreeB==true){//Pages en Bas
+           if(pLevel==1 || pLevel==0){//Gauche
+            level =
+                "00P00000000000000000\n"
+              + "0 @                0\n"
+              + "0                  0\n"
+              + "0     11111111     0\n"
+              + "0          11      0\n"
+              + "0         11       0\n"
+              + "0       11111111   0\n"
+              + "0                  0\n"
+              + "0                  P\n"
+              + "0                  0\n"
+              + "00000000000000000000\n"; 
+            pLevel=2;
+            }
+           else if(pLevel==4){//Droite
+            level =
+              "0000000000000P000000\n"
+            + "0            @     0\n"
+            + "0                  0\n"
+            + "0   11             0\n"
+            + "0   11  11         0\n"
+            + "0   111111111      0\n"
+            + "0       11         0\n"
+            + "0       11         0\n"
+            + "P                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";  
+            pLevel=4;
+            } 
+            entreeB=false;
+        }
+        else{//Page initiale
+            level =
+              "00000000000000000000\n"
+            + "0                  0\n"
+            + "0                  P\n"
+            + "0   111            0\n"
+            + "0   111 @          0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00P00000000000000000\n";
+            pLevel=0;
+        }
+    }
+    
+    public void affichage(String level){
+        this.level=level;
         addKeyListener(new TAdapter());
         setFocusable(true);
         initWorld();
@@ -72,6 +221,7 @@ public class Board extends JPanel {
         Wall wall;
         Baggage b;
         Area a;
+        Porte p;
 
 
         for (int i = 0; i < level.length(); i++) {
@@ -92,6 +242,10 @@ public class Board extends JPanel {
             } else if (item == '1') {
                 wall = new Wall(x, y, 1);
                 walls.add(wall);
+                x += SPACE;
+             }else if (item == 'P') {
+                p = new Porte(x, y);
+                portes.add(p);
                 x += SPACE;
             }else if (item == '$') {
                 b = new Baggage(x, y);
@@ -121,6 +275,7 @@ public class Board extends JPanel {
         world.addAll(walls);
         world.addAll(areas);
         world.addAll(baggs);
+        world.addAll(portes);
         world.add(soko);
 
         for (int i = 0; i < world.size(); i++) {
@@ -133,12 +288,11 @@ public class Board extends JPanel {
             } else {
                 g.drawImage(item.getImage(), item.x(), item.y(), this);
             }
-
-            if (completed) {
+             if (completed) {
                 g.setColor(new Color(0, 0, 0));
                 g.drawString("Completed", 25, 20);
+                restartLevel();
             }
-
         }
     }
 
@@ -147,6 +301,7 @@ public class Board extends JPanel {
         super.paint(g);
         buildWorld(g);
     }
+
 
     class TAdapter extends KeyAdapter {
 
@@ -160,10 +315,15 @@ public class Board extends JPanel {
             
             int key = e.getKeyCode();
 
-
+                
             if (key == KeyEvent.VK_LEFT) {
                 if (checkWallCollision(soko,
                         LEFT_COLLISION)) {
+                    return;
+                }
+                if (checkPorteCollision(soko,
+                        LEFT_COLLISION)) {
+                    chargerLevel();
                     return;
                 }
 
@@ -179,7 +339,12 @@ public class Board extends JPanel {
                         RIGHT_COLLISION)) {
                     return;
                 }
-
+                if (checkPorteCollision(soko,
+                        RIGHT_COLLISION)) {
+                    chargerLevel();
+                   return;
+                }
+                
                 if (checkBagCollision(RIGHT_COLLISION)) {
                     return;
                 }
@@ -192,7 +357,13 @@ public class Board extends JPanel {
                         TOP_COLLISION)) {
                     return;
                 }
-
+                
+                if (checkPorteCollision(soko,
+                        TOP_COLLISION)) {
+                    chargerLevel();
+                    return;
+                }
+                
                 if (checkBagCollision(TOP_COLLISION)) {
                     return;
                 }
@@ -205,7 +376,13 @@ public class Board extends JPanel {
                         BOTTOM_COLLISION)) {
                     return;
                 }
-
+                
+                if (checkPorteCollision(soko,
+                        BOTTOM_COLLISION)) {
+                    chargerLevel();
+                    return;
+                }
+                
                 if (checkBagCollision(BOTTOM_COLLISION)) {
                     return;
                 }
@@ -266,7 +443,55 @@ public class Board extends JPanel {
         return false;
     }
 
+     private boolean checkPorteCollision(Actor actor, int type) {
     
+        if (type == LEFT_COLLISION) {
+
+            for (int i = 0; i < portes.size(); i++) {
+                Porte entree = (Porte) portes.get(i);
+                if (actor.isLeftCollision(entree)) {
+                    entreeG=true;
+                    return true;
+                }
+            }
+            return false;
+
+        } else if (type == RIGHT_COLLISION) {
+
+            for (int i = 0; i < portes.size(); i++) {
+                 Porte entree = (Porte) portes.get(i);
+                if (actor.isRightCollision(entree)) {
+                    entreeD=true;
+                    return true;
+                }
+            }
+            return false;
+
+        } else if (type == TOP_COLLISION) {
+
+            for (int i = 0; i < portes.size(); i++) {
+                Porte entree = (Porte) portes.get(i);
+                if (actor.isTopCollision(entree)) {
+                    entreeH=true;
+                    return true;
+                }
+            }
+            return false;
+
+        } else if (type == BOTTOM_COLLISION) {
+
+            for (int i = 0; i < portes.size(); i++) {
+                Porte entree = (Porte) portes.get(i);
+                if (actor.isBottomCollision(entree)) {
+                    entreeB=true;
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+     
     private boolean checkBagCollision(int type) {
 
         if (type == LEFT_COLLISION) {
@@ -401,6 +626,21 @@ public class Board extends JPanel {
         areas.clear();
         baggs.clear();  
         walls.clear();
+        entreeG=false;
+        entreeD=false;
+        entreeH=false;
+        entreeB=false;
+        initWorld();
+        if (completed) {
+            completed = false;
+        }
+    }
+    
+    public final void chargerLevel(){
+        areas.clear();
+        baggs.clear();  
+        walls.clear();
+        modifierPage();
         initWorld();
         if (completed) {
             completed = false;
@@ -408,3 +648,130 @@ public class Board extends JPanel {
     }
 }
 
+/*
+        if (i==0 && j==1){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0                  0\n"
+            + "0   111            0\n"
+            + "0   111            0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }
+        if (i==1 && j==0){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0                  0\n"
+            + "0   111         111111   0\n"
+            + "0   111    11111        0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }
+        if (i==1 && j==1){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0                  0\n"
+            + "0   111            0\n"
+            + "0   111            0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }
+        if (i==2 && j==0){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0                  0\n"
+            + "0   111            0\n"
+            + "0   111            0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }
+        if (i==2 && j==1){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0                  0\n"
+            + "0   111            0\n"
+            + "0   111            0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }
+        if (i==3 && j==0){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0                  0\n"
+            + "0   111            0\n"
+            + "0   111            0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }
+        if (i==3 && j==1){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0                  0\n"
+            + "0   111            0\n"
+            + "0   111            0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }
+        if (i==4 && j==0){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0                  0\n"
+            + "0   111            0\n"
+            + "0   111            0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }
+        if (i==4 && j==1){
+        level =
+              "00000000000000000000\n"
+            + "0 @                0\n"
+            + "0         111      0\n"
+            + "0   111            0\n"
+            + "0   111            0\n"
+            + "0                  0\n"
+            + "0      111         0\n"
+            + "0      111         0\n"
+            + "0                  0\n"
+            + "0                  0\n"
+            + "00000000000000000000\n";
+        }*/
