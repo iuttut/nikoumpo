@@ -12,8 +12,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import static sun.security.krb5.Config.refresh;
-
 /**
  *
  * @author DJBRANBRAN
@@ -82,7 +80,7 @@ public class Board extends JPanel {
             }
             entreeG=false;          
         }
-        if(entreeD==true){//Pages à droite
+        else if(entreeD==true){//Pages à droite
             if(pLevel==0 || pLevel==1){//Haut
             level =
               "00000000000000000000\n"
@@ -98,7 +96,7 @@ public class Board extends JPanel {
             + "0000000000000P000000\n";  
             pLevel=3;
             }
-            else if(pLevel==4){//Bas
+            else if(pLevel==2){//Bas
             level =
               "0000000000000P000000\n"
             + "0                  0\n"
@@ -115,7 +113,7 @@ public class Board extends JPanel {
             }
             entreeD=false;
         }
-        if(entreeH==true){//Pages en Haut
+        else if(entreeH==true){//Pages en Haut
             if(pLevel==2){//Gauche
             level =
                 "00000000000000000000\n"
@@ -148,7 +146,7 @@ public class Board extends JPanel {
             }
             entreeH=false;
         }
-        if(entreeB==true){//Pages en Bas
+        else if(entreeB==true){//Pages en Bas
            if(pLevel==1 || pLevel==0){//Gauche
             level =
                 "00P00000000000000000\n"
@@ -164,7 +162,7 @@ public class Board extends JPanel {
               + "00000000000000000000\n"; 
             pLevel=2;
             }
-           else if(pLevel==4){//Droite
+           else if(pLevel==3){//Droite
             level =
               "0000000000000P000000\n"
             + "0            @     0\n"
@@ -626,6 +624,7 @@ public class Board extends JPanel {
         areas.clear();
         baggs.clear();  
         walls.clear();
+        portes.clear();
         entreeG=false;
         entreeD=false;
         entreeH=false;
@@ -640,6 +639,7 @@ public class Board extends JPanel {
         areas.clear();
         baggs.clear();  
         walls.clear();
+        portes.clear();
         modifierPage();
         initWorld();
         if (completed) {
