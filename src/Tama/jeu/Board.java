@@ -29,6 +29,7 @@ public class Board extends JPanel {
     private ArrayList baggs = new ArrayList();
     private ArrayList areas = new ArrayList();
     private ArrayList portes = new ArrayList();
+    private ArrayList combats = new ArrayList();
     private Player soko;
     private int w = 0;
     private int h = 0;
@@ -183,9 +184,9 @@ public class Board extends JPanel {
             level =
               "00000000000000000000\n"
             + "0                  0\n"
-            + "0                  P\n"
+            + "0           CCCCCCCC@    P\n"
             + "0   111            0\n"
-            + "0   111 @          0\n"
+            + "0   111            0\n"
             + "0                  0\n"
             + "0      111         0\n"
             + "0      111         0\n"
@@ -220,7 +221,7 @@ public class Board extends JPanel {
         Baggage b;
         Area a;
         Porte p;
-
+        Combat c;
 
         for (int i = 0; i < level.length(); i++) {
 
@@ -241,11 +242,15 @@ public class Board extends JPanel {
                 wall = new Wall(x, y, 1);
                 walls.add(wall);
                 x += SPACE;
-             }else if (item == 'P') {
+            } else if (item == 'P') {
                 p = new Porte(x, y);
                 portes.add(p);
                 x += SPACE;
-            }else if (item == '$') {
+            } else if (item == 'C') {
+                c = new Combat(x, y);
+                combats.add(c);
+                x += SPACE;
+            } else if (item == '$') {
                 b = new Baggage(x, y);
                 baggs.add(b);
                 x += SPACE;
@@ -274,6 +279,7 @@ public class Board extends JPanel {
         world.addAll(areas);
         world.addAll(baggs);
         world.addAll(portes);
+        world.addAll(combats);
         world.add(soko);
 
         for (int i = 0; i < world.size(); i++) {
@@ -331,6 +337,10 @@ public class Board extends JPanel {
 
                 soko.move(-SPACE, 0);
 
+                if (checkCombatCollision(soko,LEFT_COLLISION)) {
+                    return;
+                }
+                
             } else if (key == KeyEvent.VK_RIGHT) {
 
                 if (checkWallCollision(soko,
@@ -348,6 +358,10 @@ public class Board extends JPanel {
                 }
 
                 soko.move(SPACE, 0);
+                
+                 if (checkCombatCollision(soko,RIGHT_COLLISION)) {
+                    return;
+                }
 
             } else if (key == KeyEvent.VK_UP) {
 
@@ -367,6 +381,10 @@ public class Board extends JPanel {
                 }
 
                 soko.move(0, -SPACE);
+                
+                if (checkCombatCollision(soko,TOP_COLLISION)) {
+                    return;
+                }
 
             } else if (key == KeyEvent.VK_DOWN) {
 
@@ -386,6 +404,10 @@ public class Board extends JPanel {
                 }
 
                 soko.move(0, SPACE);
+                
+                if (checkCombatCollision(soko,BOTTOM_COLLISION)) {
+                    return;
+                }
 
             } else if (key == KeyEvent.VK_R) {
                 restartLevel();
@@ -490,7 +512,83 @@ public class Board extends JPanel {
         return false;
     }
      
-    private boolean checkBagCollision(int type) {
+     private void lancerCombat(){//--------------------------------------------- A MODIFIER ------------------------------------
+         //Faire la partie combat !
+         System.out.println("Entrez dans lancerCombat()");
+         
+     }
+     
+      private boolean checkCombatCollision(Actor actor ,int type) {
+          if (type == LEFT_COLLISION) {
+              for (int i = 0; i < combats.size(); i++) {
+                Combat combat = (Combat) combats.get(i);
+                if (actor.isLeftCollision(combat)) {
+                    
+                    int a = (int)(Math.random()*(10-0))+1;
+                
+                    if (a>5){  
+                       lancerCombat();
+                       return true;
+                    }
+                
+                }
+              }
+                
+          }
+          else if (type == RIGHT_COLLISION) {
+           
+              for (int i = 0; i < combats.size(); i++) {
+                Combat combat = (Combat) combats.get(i);
+                if (actor.isRightCollision(combat)) {
+                    
+                    int a = (int)(Math.random()*(10-0))+1;
+                
+                    if (a>5){  
+                       lancerCombat();
+                       return true;
+                    }
+                
+                }
+              }
+          }
+          else if (type == TOP_COLLISION) {
+           
+              for (int i = 0; i < combats.size(); i++) {
+                Combat combat = (Combat) combats.get(i);
+                if (actor.isTopCollision(combat)) {
+                    
+                    int a = (int)(Math.random()*(10-0))+1;
+                
+                    if (a>5){  
+                       lancerCombat();
+                       return true;
+                    }
+                
+                }
+              }
+          }
+          else if (type == BOTTOM_COLLISION) {
+            
+              for (int i = 0; i < combats.size(); i++) {
+                Combat combat = (Combat) combats.get(i);
+                if (actor.isBottomCollision(combat)) {
+                    
+                    int a = (int)(Math.random()*(10-0))+1;
+                
+                    if (a>5){  
+                       lancerCombat();
+                       return true;
+                    }
+                
+                }
+              }
+          }
+          return false;
+      }
+   
+
+          
+      private boolean checkBagCollision(int type) {
 
         if (type == LEFT_COLLISION) {
 
@@ -618,9 +716,8 @@ public class Board extends JPanel {
             repaint();
         }
     }
-
-    public void restartLevel() {
-
+    public void clearLevel(){
+        combats.clear();
         areas.clear();
         baggs.clear();  
         walls.clear();
@@ -629,6 +726,10 @@ public class Board extends JPanel {
         entreeD=false;
         entreeH=false;
         entreeB=false;
+    }
+
+    public void restartLevel() {
+        clearLevel();
         initWorld();
         if (completed) {
             completed = false;
@@ -636,6 +737,7 @@ public class Board extends JPanel {
     }
     
     public final void chargerLevel(){
+        combats.clear();
         areas.clear();
         baggs.clear();  
         walls.clear();
@@ -647,131 +749,3 @@ public class Board extends JPanel {
         }
     }
 }
-
-/*
-        if (i==0 && j==1){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }
-        if (i==1 && j==0){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111         111111   0\n"
-            + "0   111    11111        0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }
-        if (i==1 && j==1){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }
-        if (i==2 && j==0){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }
-        if (i==2 && j==1){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }
-        if (i==3 && j==0){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }
-        if (i==3 && j==1){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }
-        if (i==4 && j==0){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0                  0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }
-        if (i==4 && j==1){
-        level =
-              "00000000000000000000\n"
-            + "0 @                0\n"
-            + "0         111      0\n"
-            + "0   111            0\n"
-            + "0   111            0\n"
-            + "0                  0\n"
-            + "0      111         0\n"
-            + "0      111         0\n"
-            + "0                  0\n"
-            + "0                  0\n"
-            + "00000000000000000000\n";
-        }*/
